@@ -2,17 +2,55 @@ import React, {useState, useEffect} from 'react'
 import {authService, firebaseInstance} from '../../Firebase';
 import classes from './LoginForm.module.scss';
 import Text from '../common/Text';
+
+import { useDispatch, useSelector} from 'react-redux';
+import * as userActions from '../../store/modules/user';
+interface UserType{
+    USER:{
+        data:{
+            email: string,
+            token:string,
+        },
+        isLoggedIn: boolean
+    }
+}
+
 export default function LoginForm () {
     const [init, setInit]= useState(false);
     const [isLoggedIn, setIsLoggedIn]=useState(false);
+    const [userInfo, setUserInfo]=useState({email:'', refreshToken:'', uid:''})
+
+    const user=useSelector(({USER}:UserType)=>USER);
+
+    const dispath=useDispatch();
+
+    console.log('유저 정보', user);
+
+    useEffect(()=>{
+        isLoggedIn
+        ? dispath(userActions.LOGIN(userInfo))
+        : dispath(userActions.LOGOUT())
+    },[userInfo]);
 
     useEffect(()=>{
         authService.onAuthStateChanged((user)=>{
             if(user){
-                console.log(user);
-                setIsLoggedIn(true);
+                const {email, refreshToken, uid}= user;
+                if(email){
+                    setIsLoggedIn(true);
+                    setUserInfo({
+                        email:email,
+                        refreshToken: refreshToken,
+                        uid: uid,
+                    })
+                }
             }else{
                 setIsLoggedIn(false);
+                setUserInfo({
+                    email:'',
+                    refreshToken: '',
+                    uid: '',
+                })
             }
         })
     },[])

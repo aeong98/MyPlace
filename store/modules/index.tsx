@@ -1,6 +1,6 @@
 import {  Action, ThunkDispatch, combineReducers } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
-
+import user from './user';
 
 const reducer = (state:any, action:any) => {
   if (action.type == HYDRATE) {
@@ -10,6 +10,7 @@ const reducer = (state:any, action:any) => {
     };
   }
   return combineReducers({
+    user,
     // 여기에 추가
   })(state, action);
 };
