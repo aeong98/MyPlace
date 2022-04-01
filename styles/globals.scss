@@ -1,0 +1,39 @@
+@charset "utf-8";
+
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
+html, body, div, span, applet, object, iframe, table, caption, tbody, tfoot, thead, tr, th, td,
+del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, input, select, textarea, button,
+menu, nav, section, hgroup, article, header, aside, footer {
+    font-family: 'Spoqa Han Sans Neo', 'Sans-serif';
+    font-weight: inherit;
+    font-style: inherit;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: default;
+}
+
+html, body, #__next {
+  height:100%; 
+  overflow:hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.col{
+  display:flex;
+}
+li{
+  list-style-type:none;
+}

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext", "es2015"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "downlevelIteration":true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_error.js", "sentry.server.config.js", "sentry.client.config.js", "next.config.js", "__mocks__/fileMock.js", ".storybook/Provider.tsx"],
+  "exclude": ["node_modules"],
+}
