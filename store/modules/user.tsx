@@ -25,7 +25,7 @@ const userSlice=createSlice({
             state.data.uid=uid;
             state.isLoggedIn = true;
         },
-        LOGOUT: (state, action)=>{
+        LOGOUT: (state)=>{
             state.data.email='';
             state.data.refreshToken='';
             state.data.uid='';
