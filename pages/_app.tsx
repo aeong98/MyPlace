@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     },
   });
 
-  const kakaoLink=`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_API_KEY_KAKAO}`;
+  const kakaoLink=`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_API_KEY_KAKAO}&libraries=services,clusterer,drawing`;
   console.log(process.env.NEXT_PUBLIC_API_KEY_KAKAO)
 
 
