@@ -32,7 +32,6 @@ const initialState={
         y: 0
     },
     map:[],
-    ps:[],
 }
 const mapSlice=createSlice({
     name:"MAP",
@@ -40,7 +39,6 @@ const mapSlice=createSlice({
     reducers:{
         INITIALIZE:(state, action)=>{
             state.map=action.payload.map;
-            state.ps=action.payload.ps;
         },
         SEARCH : (state,action:PayloadAction<Place>)=>{
             state.data=action.payload;

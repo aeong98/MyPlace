@@ -82,7 +82,7 @@ export default function MapContainer({searchPlace}:MapContainerProps) {
 
             kakao.maps.event.addListener(marker, 'click', function () {
                 infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>')
-                infowindow.open(map, marker)
+                infowindow.open(kakaoMap, marker)
             })
         }
 
