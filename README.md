@@ -1,34 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏡 마이플레이스 (개인 프로젝트)
+: 내가 방문했던 곳의 기록을 남기고 이를 다른 사람들과 공유하는 서비스입니다.
 
-## Getting Started
 
-First, run the development server:
+## 🖥 기술 스택
+- 프론트엔드
+    - 프레임워크 : Next.js (Typescript, SASS)
+    - 상태관리: Redux Toolkit
+    - 추가 의존성: Storybook, Jest, React Testing Library
+- 서버
+    - Firebase
+        - Firebase Authentication
+        - Firebase Realtime Database
+        - Firebase Function
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## 💡 주요 기능
+- 지도에서 장소 선택 및 탐색
+- 장소 기반 내 일기장 CRUD 기능
+- 장소 기반 내 주위 사람들 일기장(public) 피드 서비스
+- 댓글 기능 및 담기 기능 
+- 소셜 로그인 및, 마이페이지 서비스
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 프로젝트 상세 설명 노션 
+https://whispering-nylon-83d.notion.site/MyPlace-5a6eda874c5649189cf998ecbfd0d906
