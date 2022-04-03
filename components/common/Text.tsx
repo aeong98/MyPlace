@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './Text.module.scss';
+import classes from './common.module.scss';
 
 export interface TextProps{
     children : React.ReactNode
