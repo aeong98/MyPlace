@@ -3,6 +3,9 @@ import dynamic from 'next/dynamic'
 import Layout from '../../components/common/Layout';
 import classes from './mapPage.module.scss';
 import Router from 'next/router';
+import { useDispatch } from 'react-redux';
+import * as mapActions from '../../store/modules/map';
+
 const MapContainerWithNoSSR=dynamic(
     ()=>import('../../components/map/MapContainer'),
     {ssr: false}
@@ -11,7 +14,7 @@ export default function MapPage() {
     const [check, setCheck]=useState(false);
     const [searchKeyword, setSearchKeyword]=useState('');
     const [place, setPlace]=useState('');
-
+    const dispatch=useDispatch();
     const onChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
         e.preventDefault();
         setSearchKeyword(e.target.value);
@@ -24,9 +27,9 @@ export default function MapPage() {
 
     }
 
-
     useEffect(()=>{
         console.log('감지');
+        dispatch (mapActions.CLEARMAP());
         setCheck(true)
     },[])
 
