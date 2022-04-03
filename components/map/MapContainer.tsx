@@ -20,16 +20,15 @@ interface MapType{
 export default function MapContainer({searchPlace}:MapContainerProps) {
     // 검색결과 배열에 담아줌
     const [Places, setPlaces] = useState<Place[]>([])
+    const [markerList, setMarkerList] =useState<any[]>([]);
   
 
     // 사용자가 선택한 장소
     const selectedPlace=useSelector(({map}:MapType)=>map.data);
-
     // map 중복 렌더링 발생 방지를 위해, map 객체 저장
     const kakaoMap=useSelector(({map}:MapType)=>map.map);
 
     const dispatch  = useDispatch();
-
 
     useEffect(()=>{
         if(kakaoMap.length===0){
@@ -53,6 +52,9 @@ export default function MapContainer({searchPlace}:MapContainerProps) {
             if (status === kakao.maps.services.Status.OK) {
                 let bounds = new kakao.maps.LatLngBounds()
 
+                hideMarkers();
+                setMarkerList([]);
+
                 for (let i = 0; i < data.length; i++) {
                     displayMarker(data[i])
                     bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
@@ -64,6 +66,7 @@ export default function MapContainer({searchPlace}:MapContainerProps) {
         }
 
         function showOnePlage(data:Place){
+            
             let bounds = new kakao.maps.LatLngBounds();
 
             displayMarker(data);
@@ -75,15 +78,32 @@ export default function MapContainer({searchPlace}:MapContainerProps) {
 
 
         function displayMarker(place:Place) {
+
             let marker = new kakao.maps.Marker({
-                map: kakaoMap,
                 position: new kakao.maps.LatLng(place.y, place.x),
             })
+
+            marker.setMap(kakaoMap);
+
+            setMarkerList(markerList=>[
+                ...markerList,
+                marker
+            ])
 
             kakao.maps.event.addListener(marker, 'click', function () {
                 infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>')
                 infowindow.open(kakaoMap, marker)
             })
+        }
+
+        function setMarkers(map:any){
+            for (var i=0; i <markerList.length; i++){
+                markerList[i].setMap(map);
+            }
+        }
+        
+        function hideMarkers(){
+            setMarkers(null);
         }
 
     },[searchPlace])
