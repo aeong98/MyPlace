@@ -31,8 +31,11 @@ const initialState={
         x: 0,
         y: 0
     },
+    status:'false',
     map:[],
 }
+
+
 const mapSlice=createSlice({
     name:"MAP",
     initialState:initialState,
@@ -42,10 +45,11 @@ const mapSlice=createSlice({
         },
         SEARCH : (state,action:PayloadAction<Place>)=>{
             state.data=action.payload;
+            state.status='click';
         },
         CLEAR: (state)=>{
             state=initialState;
-        }
+        },
     }
 })
 
