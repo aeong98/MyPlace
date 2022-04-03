@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import dynamic from 'next/dynamic'
 import Layout from '../../components/common/Layout';
-
+import classes from './mapPage.module.scss';
 const MapContainerWithNoSSR=dynamic(
     ()=>import('../../components/map/MapContainer'),
     {ssr: false}
@@ -24,10 +24,16 @@ export default function MapPage() {
     return(
         <div>
             <Layout>
-                <form onSubmit={handleSubmit}>
-                    <input placeholder="장소 이름을 검색하세요." onChange={onChange} value={searchKeyword}></input>
-                    <button type="submit">검색</button>
-                </form>
+                <div className={classes.search_form_container}>
+                    <form onSubmit={handleSubmit} className={classes.search_form}>
+                        <input 
+                            placeholder="장소 이름을 검색하세요." 
+                            onChange={onChange} 
+                            value={searchKeyword} 
+                            className={classes.search_input}></input>
+                        <button type="submit" className={classes.search_button}>검색</button>
+                    </form>
+                </div>    
                 <MapContainerWithNoSSR searchPlace={place}></MapContainerWithNoSSR>
             </Layout>
         </div>

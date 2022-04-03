@@ -44,6 +44,7 @@ const mapSlice=createSlice({
             state.map=action.payload.map;
         },
         SEARCH : (state,action:PayloadAction<Place>)=>{
+            // TODO : 초기화 필요 (불변경 지키지 않음)
             state.data=action.payload;
             state.status='click';
         },

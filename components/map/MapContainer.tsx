@@ -17,6 +17,7 @@ interface MapType{
     }
 }
 
+// TODO : 나중에 밑의 코드 커스텀 훅으로 빼놔야 됨
 export default function MapContainer({searchPlace}:MapContainerProps) {
     // 검색결과 배열에 담아줌
     const [Places, setPlaces] = useState<Place[]>([])
@@ -117,8 +118,8 @@ export default function MapContainer({searchPlace}:MapContainerProps) {
         <div
             id="myMap"
             style={{
-            width: '500px',
-            height: '500px',
+            width: '428px',
+            height: '428px',
             }}
         ></div>
             <ListContainer places={Places}></ListContainer>
