@@ -2,9 +2,12 @@ import React, {useEffect, useState} from 'react'
 import classes from './common.module.scss';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import * as mapActions from '../../store/modules/map';
 
 export default function Footer() {
   const router= useRouter();
+  const dispatch=useDispatch();
   // 만약에 router 가 홈(로그인) 화면이라면, footer 숨기기
   const style={
     display: router.asPath === '/'? 'none':'flex',
@@ -24,13 +27,18 @@ export default function Footer() {
             {menu.map((mu,i)=>{
               const [path, name]=mu;
               return(
-                <Link href={path}>
-                  <li className={classes.menu} style={{
+                  <li className={classes.menu} 
+                  onClick={()=>{
+                    dispatch (mapActions.CLEARMAP());
+                    router.push(
+                    path,
+                    path,
+                    {shallow:false}
+                  )}}
+                  style={{
                     color: router.asPath === path
                     ? '#5D5FEF'
-                    : '#667080'
-                  }} >{name}</li>
-                </Link>
+                    : '#667080'}} >{name}</li>
               )
             })}
         </ul>

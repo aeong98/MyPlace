@@ -27,8 +27,10 @@ export default function MapContainer({searchPlace}:MapContainerProps) {
 
     // DESCRIBE: 검색 후 동작하는 로직(지도와 목록에 검색 결과 띄우기)
     useEffect(()=>{
+        console.log('map container');
         // 가장 처음에 kakoMap 객체 초기화 (이후에 중복해서 생기지 않도록 redux 에 객체 저장)
         if(kakaoMap.length===0){
+            console.log('엥');
             const container = document.getElementById('myMap')
             const options = {
                 center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -38,9 +40,12 @@ export default function MapContainer({searchPlace}:MapContainerProps) {
             dispatch(mapActions.INITIALIZE({map:map}))
         }
 
-        const ps = new kakao.maps.services.Places()
-
-		ps.keywordSearch(searchPlace, placesSearchCB)
+        if(searchPlace){
+            console.log(searchPlace);
+            const ps = new kakao.maps.services.Places()
+            ps.keywordSearch(searchPlace, placesSearchCB)
+        }
+ 
         
         // 검색 결과에 따라 마커 생성 및 위치 조정
         function placesSearchCB(data:Place[], status:string, pagination:any) {

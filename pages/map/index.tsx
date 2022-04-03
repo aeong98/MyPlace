@@ -2,11 +2,13 @@ import React, {useState, useEffect} from 'react'
 import dynamic from 'next/dynamic'
 import Layout from '../../components/common/Layout';
 import classes from './mapPage.module.scss';
+import Router from 'next/router';
 const MapContainerWithNoSSR=dynamic(
     ()=>import('../../components/map/MapContainer'),
     {ssr: false}
 )
 export default function MapPage() {
+    const [check, setCheck]=useState(false);
     const [searchKeyword, setSearchKeyword]=useState('');
     const [place, setPlace]=useState('');
 
@@ -21,6 +23,13 @@ export default function MapPage() {
         setSearchKeyword('');
 
     }
+
+
+    useEffect(()=>{
+        console.log('감지');
+        setCheck(true)
+    },[])
+
     return(
         <div>
             <Layout>
@@ -34,7 +43,7 @@ export default function MapPage() {
                         <button type="submit" className={classes.search_button}>검색</button>
                     </form>
                 </div>    
-                <MapContainerWithNoSSR searchPlace={place}></MapContainerWithNoSSR>
+                {true&&<MapContainerWithNoSSR searchPlace={place}></MapContainerWithNoSSR>}
             </Layout>
         </div>
     )

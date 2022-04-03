@@ -51,8 +51,12 @@ const mapSlice=createSlice({
         CLEAR: (state)=>{
             state=initialState;
         },
+        CLEARMAP:(state)=>{
+            state.map=[];
+            state.status='false';
+        }
     }
 })
 
-export const {INITIALIZE, SEARCH, CLEAR} = mapSlice.actions;
+export const {INITIALIZE, SEARCH, CLEAR, CLEARMAP} = mapSlice.actions;
 export default mapSlice.reducer;
