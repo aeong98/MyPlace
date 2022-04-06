@@ -52,3 +52,30 @@
 .hide{
     display: none;
 }
+
+.icon_button{
+    width: 64px;
+    height: 64px;
+    background: #6A3EA1;
+    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 100px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+
+    &:hover{
+        background-color: #3A2258;
+        cursor: pointer;
+    }
+    .icon_content{
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        text-align: center;
+    }
+}
+
+.icon_label{
+    color: #6A3EA1;
+    font-weight: bold;
+}
