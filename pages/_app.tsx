@@ -5,7 +5,7 @@ import {wrapper} from '../store';
 import Head from 'next/head';
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-
+import Layout from '../components/common/Layout';
 function MyApp({ Component, pageProps }: AppProps) {
 
   const queryClientRef = React.useRef<QueryClient>();
@@ -29,7 +29,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <QueryClientProvider client={queryClientRef.current}>
         <Hydrate state={pageProps.dehydratedState}>
+          <Layout>
             <Component {...pageProps} />
+          </Layout>
         </Hydrate>
         <ReactQueryDevtools initialIsOpen></ReactQueryDevtools>
       </QueryClientProvider>

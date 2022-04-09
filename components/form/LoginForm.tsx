@@ -44,12 +44,12 @@ export default function LoginForm () {
                     })
                 }
             }else{
-                // setIsLoggedIn(false);
-                // setUserInfo({
-                //     email:'',
-                //     refreshToken: '',
-                //     uid: '',
-                // })
+                setIsLoggedIn(false);
+                setUserInfo({
+                    email:'',
+                    refreshToken: '',
+                    uid: '',
+                })
             }
         })
     },[])
@@ -60,10 +60,18 @@ export default function LoginForm () {
         let provider = new firebaseInstance.auth.GoogleAuthProvider();
         authService.signInWithPopup(provider)
         .then((result)=>{
-            console.log(result);
-            // 만약에 회원 정보 없다면 생성
-            router.push('/register/');
-            // 있다면 그냥 로그인 
+            dbService.ref('users/'+result.user?.uid)
+                     .on('value', (snapshot)=>{
+                         const data = snapshot.val();
+                         // DSECRIBE: 이미 있는 계정이면 diary 로 이동
+                         if(data){
+                             router.push('/diary/');
+                         }
+                        // DESCRIBE: 없는 계정이면 회원가입 페이지로 이동 
+                         else{
+                            router.push('/register/');
+                         }
+                     })
         })
         .catch((error)=>{
             console.log(error);

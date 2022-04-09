@@ -59,7 +59,6 @@ export default function index() {
     }
     return (
         <div>
-            <Layout>
                 <div>Playground 에 회원가입 하시겠습니까?</div>
                 <form onSubmit={onSubmit}>
                     <div>
@@ -74,7 +73,6 @@ export default function index() {
                         <button type="submit">회원가입하기</button>
                     </div>
                 </form>
-            </Layout>
         </div>
     )
 }

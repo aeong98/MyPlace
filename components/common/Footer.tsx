@@ -9,16 +9,21 @@ export default function Footer() {
   const router= useRouter();
   const dispatch=useDispatch();
   // 만약에 router 가 홈(로그인) 화면이라면, footer 숨기기
-  const style={
-    display: router.asPath === '/'? 'none':'flex',
-  }
 
+  const hide=[
+    '/',
+    '/diary/editor/'
+  ]
   const menu=[
     ['/diary/', '내 일기장'],
     ['/map/', '일기장 쓰기'],
     ['/feed/', '소통 공간'],
     ['/setting/', '설정']
   ]
+
+  const style={
+    display: hide.includes(router.asPath)? 'none':'flex',
+  }
 
 
   return (

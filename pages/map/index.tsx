@@ -2,11 +2,18 @@ import React, {useState, useEffect, useCallback} from 'react'
 import dynamic from 'next/dynamic'
 import Layout from '../../components/common/Layout';
 import classes from './mapPage.module.scss';
-import Router from 'next/router';
-import { useDispatch } from 'react-redux';
+import {useRouter} from "next/router";
+import { useSelector, useDispatch } from 'react-redux';
 import * as mapActions from '../../store/modules/map';
 import IconButton from '../../components/common/IconButton';
 import ShortModal from '../../components/common/modal/ShortModal';
+interface MapType{
+    map:{
+        data:any;
+        map:any;
+        status:string;
+    }
+}
 
 const MapContainerWithNoSSR=dynamic(
     ()=>import('../../components/map/MapContainer'),
@@ -18,8 +25,10 @@ export default function MapPage() {
     const [place, setPlace]=useState('');
 
     const [showModal, setShowModal]=useState(false);
+    const selectedPlace= useSelector(({map}:MapType)=>map).data;
 
     const dispatch=useDispatch();
+    const router= useRouter();
     const onChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
         e.preventDefault();
         setSearchKeyword(e.target.value);
@@ -42,9 +51,12 @@ export default function MapPage() {
         setShowModal(true);
     },[showModal]);
 
+    const onClickWriteBtn=()=>{
+        router.push('/diary/editor/');
+    }   
+
     return(
         <div>
-            <Layout>
                 <div className={classes.search_form_container}>
                     <form onSubmit={handleSubmit} className={classes.search_form}>
                         <input 
@@ -63,10 +75,9 @@ export default function MapPage() {
                     showModal={showModal}
                     setShowModal={setShowModal}
                 >
-                    <div>여기서 일기를 작성하기겠습니까?</div>
-                    <button>버튼 누르기</button>
+                    <div>{selectedPlace.place_name}여기서 일기를 작성하기겠습니까?</div>
+                    <button onClick={onClickWriteBtn}>일기 쓰기</button>
                 </ShortModal>
-            </Layout>
         </div>
     )
 }
