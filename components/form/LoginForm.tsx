@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {authService, firebaseInstance} from '../../Firebase';
+import {authService, firebaseInstance, dbService} from '../../Firebase';
+import {useRouter} from "next/router";
 import classes from './LoginForm.module.scss';
 import Text from '../common/Text';
 
@@ -21,10 +22,8 @@ export default function LoginForm () {
     const [userInfo, setUserInfo]=useState({email:'', refreshToken:'', uid:''})
 
     const user=useSelector(({USER}:UserType)=>USER);
-
+    const router= useRouter();
     const dispath=useDispatch();
-
-    console.log('유저 정보', user);
 
     useEffect(()=>{
         isLoggedIn
@@ -45,21 +44,26 @@ export default function LoginForm () {
                     })
                 }
             }else{
-                setIsLoggedIn(false);
-                setUserInfo({
-                    email:'',
-                    refreshToken: '',
-                    uid: '',
-                })
+                // setIsLoggedIn(false);
+                // setUserInfo({
+                //     email:'',
+                //     refreshToken: '',
+                //     uid: '',
+                // })
             }
         })
     },[])
+
+
 
     const singIn=()=>{
         let provider = new firebaseInstance.auth.GoogleAuthProvider();
         authService.signInWithPopup(provider)
         .then((result)=>{
             console.log(result);
+            // 만약에 회원 정보 없다면 생성
+            router.push('/register/');
+            // 있다면 그냥 로그인 
         })
         .catch((error)=>{
             console.log(error);

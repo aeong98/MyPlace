@@ -4,11 +4,10 @@ import classes from './common.module.scss';
 
 interface IconButtonProps{
     label?:string,
-    icon: any,
     onClick: (e:React.MouseEvent<HTMLDivElement>)=>void;
 }
 
-export default function IconButton({label, icon, onClick}:IconButtonProps) {
+export default function IconButton({label, onClick}:IconButtonProps) {
 
     const [isShown, setIsShown]=useState(false);
 

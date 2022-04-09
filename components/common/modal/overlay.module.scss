@@ -15,10 +15,21 @@
     z-index: 11;
     &.short{
         left:0;
-        bottom:0;
+        bottom:-260px;
         height: 260px;
         border: 1px solid #C8C5CB;
         box-sizing: border-box;
         border-radius: 16px 16px 0px 0px;
+        transition-property: all;
+        transition-duration: 2s;
+        transition-delay: 2s;
+
+        &.active{
+            transform:translate(0,-260px);
+            -webkit-transform:translate(0,-260px);
+            -moz-transform:translate(0,-260px);
+            -ms-transform:translate(0,-260px);
+            -o-transform:translate(0,-260px);
+        }
     }
 }
