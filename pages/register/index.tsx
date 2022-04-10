@@ -1,8 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect,useCallback, useState} from 'react';
 import { useSelector } from 'react-redux';
 import Layout from '../../components/common/Layout';
 import {dbService} from '../../Firebase';
 import Input from '../../components/common/Input';
+import classes from './register.module.scss';
+import Image from 'next/image';
+import Register from "../../public/images/register.png";
+import Button from '../../components/common/Button';
+
+
 interface UserType{
     user:{
         data:{
@@ -30,13 +36,14 @@ export default function index() {
         })
     },[user])
     
-    const onChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const onChange=useCallback((e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>)=>{
         const {name, value}=e.target;
         setUserInfo({
             ...userInfo,
             [name]:value,
         })
-    }
+    },[userInfo]);
+
     const onSubmit=(e:React.FormEvent)=>{
         e.preventDefault();
         console.log("유저 정보 보내기", userInfo);
@@ -58,29 +65,46 @@ export default function index() {
         
     }
     return (
-        <div>
-                <div>Playground 에 회원가입 하시겠습니까?</div>
-                <form onSubmit={onSubmit}>
-                    <Input
-                        label="닉네임"
-                        type="text"
-                        name="nickname"
-                        id="nickname"
-                        placeholder="닉네입을 입력하세요"
-                        onChange={onChange}
-                    ></Input>
-                    <Input
-                        label="자기소개"
-                        type="textarea"
-                        name="description"
-                        id="description"
-                        placeholder="자기소개를 입력해주세요"
-                        onChange={onChange}
-                    ></Input>
-                    <div>
-                        <button type="submit">회원가입하기</button>
-                    </div>
-                </form>
+        <div className={classes.wrapper}>
+            <div className={classes.image_wrapper}>
+                <Image src={Register} width={200} height={200}></Image>
+            </div>
+            <div className={classes.title}>
+               <div>
+                   {user.email} 님 환영합니다.
+               </div>
+               <div>
+                    마이플레이스에 회원가입 하시겠습니까?
+               </div>
+            </div>
+            <div className={classes.form_wrapper}>
+            <form onSubmit={onSubmit} className={classes.form}>
+                <Input
+                    label="닉네임"
+                    type="text"
+                    name="nickname"
+                    id="nickname"
+                    placeholder="1. 닉네입을 입력하세요"
+                    onChange={onChange}
+                    value={userInfo.nickname}
+                ></Input>
+                <Input
+                    label="자기소개"
+                    type="textarea"
+                    name="description"
+                    id="description"
+                    placeholder="2. 자기소개를 입력해주세요"
+                    onChange={onChange}
+                    value={userInfo.description}
+                ></Input>
+                <div>
+                    <Button 
+                        text="회원가입"
+                        submitType="submit"
+                    ></Button>
+                </div>
+            </form>
+            </div>
         </div>
     )
 }
