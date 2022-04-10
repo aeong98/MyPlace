@@ -4,10 +4,11 @@ import LoginForm from "../components/form/LoginForm";
 const Home: NextPage = () => {
   
   return (
-    <Layout>
+    <>
       <div>hi</div>
       <LoginForm></LoginForm>
-    </Layout>
+    </>
+   
   );
 };
 

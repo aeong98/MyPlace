@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import Layout from '../../components/common/Layout';
 import {dbService} from '../../Firebase';
-
+import Input from '../../components/common/Input';
 interface UserType{
     user:{
         data:{
@@ -61,14 +61,22 @@ export default function index() {
         <div>
                 <div>Playground 에 회원가입 하시겠습니까?</div>
                 <form onSubmit={onSubmit}>
-                    <div>
-                        <label htmlFor='nickname'>닉네임</label>
-                        <input type="text" name="nickname" id="nickname" placeholder='닉네임을 입력해주세요' onChange={onChange}></input>
-                    </div>
-                    <div>
-                        <label htmlFor="description">자기소개</label>
-                        <input type="text" name="description" id="description" placeholder="자기 소개를 입력해주세요" onChange={onChange}></input>
-                    </div>
+                    <Input
+                        label="닉네임"
+                        type="text"
+                        name="nickname"
+                        id="nickname"
+                        placeholder="닉네입을 입력하세요"
+                        onChange={onChange}
+                    ></Input>
+                    <Input
+                        label="자기소개"
+                        type="textarea"
+                        name="description"
+                        id="description"
+                        placeholder="자기소개를 입력해주세요"
+                        onChange={onChange}
+                    ></Input>
                     <div>
                         <button type="submit">회원가입하기</button>
                     </div>
