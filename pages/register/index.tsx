@@ -71,7 +71,7 @@ export default function index() {
             </div>
             <div className={classes.title}>
                <div>
-                   {user.email} 님 환영합니다.
+                   <span style={{fontWeight:"bold"}}>{user.email}</span><br></br>님 환영합니다.
                </div>
                <div>
                     마이플레이스에 회원가입 하시겠습니까?
@@ -97,7 +97,7 @@ export default function index() {
                     onChange={onChange}
                     value={userInfo.description}
                 ></Input>
-                <div>
+                <div className={classes.btn_wrapper}>
                     <Button 
                         text="회원가입"
                         submitType="submit"

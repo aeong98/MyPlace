@@ -5,7 +5,6 @@ const Home: NextPage = () => {
   
   return (
     <>
-      <div>hi</div>
       <LoginForm></LoginForm>
     </>
    

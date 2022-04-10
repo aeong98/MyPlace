@@ -7,6 +7,7 @@ export default function Header() {
     const hidePath=[
         '/',
         '/diary/editor/',
+        '/register/'
     ]
     
     const [hide, useHide]=useState(true);

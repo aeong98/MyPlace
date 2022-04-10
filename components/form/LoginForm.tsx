@@ -3,6 +3,10 @@ import {authService, firebaseInstance, dbService} from '../../Firebase';
 import {useRouter} from "next/router";
 import classes from './LoginForm.module.scss';
 import Text from '../common/Text';
+import Button from '../common/Button';
+import Image from 'next/image';
+import StartImage from '../../public/images/start.png';
+
 
 import { useDispatch, useSelector} from 'react-redux';
 import * as userActions from '../../store/modules/user';
@@ -90,13 +94,26 @@ export default function LoginForm () {
 
     return (
         <>
-        <div>
-            <button onClick={singIn}>구글 소셜 로그인</button>
+        <div className={classes.wrapper}>
+            <div className={classes.inner_wrapper}>
+                <div className={classes.header}>
+                    <div className={classes.title}>MYPLACE</div>
+                    <div className={classes.image}>
+                        <Image src={StartImage} width={200} height={200}></Image>
+                    </div>
+                    <div className={classes.desc}>
+                        <span className={classes.bold}>마이플레이스</span>에<br></br> 장소 일기를 남기고, 공유해보세요!
+                    </div>
+                </div>
+                <div className={classes.btn_wrapper}>
+                    <Button onClick={singIn} text="시작하기" type="transparent"></Button>
+                </div>
+            </div>
         </div>
-        <div>
-            <button onClick={signOut}>로그아웃 버튼</button>
+        {/* <div> */}
+            {/* <button onClick={signOut}>로그아웃 버튼</button>
         </div>
-        {isLoggedIn? <Text>로그인 상태</Text> : <Text>로그아웃 상태</Text>}
+        {isLoggedIn? <Text>로그인 상태</Text> : <Text>로그아웃 상태</Text>} */}
         </>
     )
 }

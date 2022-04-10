@@ -12,7 +12,8 @@ export default function Footer() {
 
   const hide=[
     '/',
-    '/diary/editor/'
+    '/diary/editor/',
+    '/register/'
   ]
   const menu=[
     ['/diary/', '내 일기장'],
