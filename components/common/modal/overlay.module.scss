@@ -3,8 +3,8 @@
     background-color:rgba(24, 14, 37, 0.4);
     width: 100%;
     z-index: 10;
-    height: 100%;
-    top: 0;
+    height: 100vh;
+    top: -100px;
     left: 0;
 }
 
@@ -13,10 +13,11 @@
     width:100%;
     background-color: #fff;
     z-index: 11;
+    padding: 20px;
     &.short{
         left:0;
-        bottom:-260px;
-        height: 260px;
+        bottom:-200px;
+        height: 200px;
         border: 1px solid #C8C5CB;
         box-sizing: border-box;
         border-radius: 16px 16px 0px 0px;
@@ -25,11 +26,11 @@
         transition-delay: 2s;
 
         &.active{
-            transform:translate(0,-260px);
-            -webkit-transform:translate(0,-260px);
-            -moz-transform:translate(0,-260px);
-            -ms-transform:translate(0,-260px);
-            -o-transform:translate(0,-260px);
+            transform:translate(0,-200px);
+            -webkit-transform:translate(0,-200px);
+            -moz-transform:translate(0,-200px);
+            -ms-transform:translate(0,-200px);
+            -o-transform:translate(0,-200px);
         }
     }
 }

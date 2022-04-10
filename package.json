@@ -22,6 +22,7 @@
     "@swc/jest": "^0.2.20",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
+    "@types/react-icons": "^3.0.0",
     "@types/react-transition-group": "^4.4.4",
     "@types/redux-logger": "^3.0.9",
     "@zeit/next-css": "^1.0.1",

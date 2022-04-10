@@ -7,13 +7,22 @@ interface InputProps{
     type:string;
     name:string;
     id:string;
-    height?:string;
     placeholder:string;
     onChange:(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>void;
 }
 
-
-export default function Input({value, label, type, name, id, height, placeholder, onChange}:InputProps) {
+/**
+ * 
+ * @param value : input 값
+ * @param label : input 라벨
+ * @param type : input 종류 default | active | focused
+ * @param name : input name 
+ * @param id : input id
+ * @param placeholder : input placeholder
+ * @param onChange : onChange 콜백 함수
+ * @returns 
+ */
+export default function Input({value, label, type, name, id, placeholder, onChange}:InputProps) {
     const [inputType, setInputType]=useState("default");
 
     const handleFocus=useCallback(()=>{
@@ -38,11 +47,13 @@ export default function Input({value, label, type, name, id, height, placeholder
     if(type==="textarea"){
         return(
             <div className={classes.input_group}>
-            <label 
-            className={classes.label} 
-            htmlFor={name}
-            style={{color: inputType=="default" ? "transparent": "rgba(24, 14, 37, 1)"}}
-            >{label}</label>
+            {label &&<label 
+                        className={classes.label} 
+                        htmlFor={name}
+                        style={{color: inputType=="default" ? "transparent": "rgba(24, 14, 37, 1)"}}>
+                        {label}
+                    </label>
+            }
             <textarea
                 className={classes[inputType]}
                 name={name}

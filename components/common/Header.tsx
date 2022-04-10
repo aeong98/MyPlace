@@ -9,6 +9,13 @@ export default function Header() {
         '/diary/editor/',
         '/register/'
     ]
+
+    const titleList:any={
+        '/diary/':'내 일기장',
+        '/map/':'장소 찾기',
+        '/feed/': '소통 공간',
+        '/setting/': '설정'
+    }
     
     const [hide, useHide]=useState(true);
     const router= useRouter();
@@ -24,14 +31,11 @@ export default function Header() {
         <>
         {!hide&&
         <div className={classes.header}>
-            <div>
-                뒤로가기
+            <div className={classes.logo}>
+                MYPLACE
             </div>
-            <div>
-                제목
-            </div>
-            <div>
-                로그아웃
+            <div className={classes.title}>
+                {titleList[router.asPath]}
             </div>
         </div>}
         </>

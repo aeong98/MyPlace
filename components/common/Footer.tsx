@@ -17,7 +17,7 @@ export default function Footer() {
   ]
   const menu=[
     ['/diary/', '내 일기장'],
-    ['/map/', '일기장 쓰기'],
+    ['/map/', '장소 찾기'],
     ['/feed/', '소통 공간'],
     ['/setting/', '설정']
   ]
