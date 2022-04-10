@@ -84,7 +84,7 @@ export default function LoginForm () {
 
     const signOut=()=>{
        authService.signOut()
-       .then((result)=>{
+       .then((result)=>{ 
            console.log(result);
        })
        .catch((error)=>{
