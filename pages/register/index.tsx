@@ -1,12 +1,10 @@
 import React, {useEffect,useCallback, useState} from 'react';
 import { useSelector } from 'react-redux';
-import Layout from '../../components/common/Layout';
 import {dbService} from '../../Firebase';
-import Input from '../../components/common/Input';
 import classes from './register.module.scss';
 import Image from 'next/image';
 import Register from "../../public/images/register.png";
-import Button from '../../components/common/Button';
+import {Button, Input} from '@components/common';
 
 
 interface UserType{
@@ -50,10 +48,10 @@ export default function index() {
         dbService
             .ref('users/'+user.uid)
             .set(userInfo)
-            .then((res)=>{
+            .then((res:any)=>{
                 console.log(res)
             })
-            .catch((err)=>{
+            .catch((err:any)=>{
                 console.log(err);
             })
 

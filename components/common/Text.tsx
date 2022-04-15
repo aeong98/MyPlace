@@ -5,7 +5,7 @@ export interface TextProps{
     children : React.ReactNode
 }
 
-export default function Text(props:TextProps) {
+export function Text(props:TextProps) {
   return (
     <div className={classes.text}>{props.children}</div>
   )

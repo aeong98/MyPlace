@@ -18,7 +18,7 @@ interface ButtonProps{
  * @param onClick 클릭 이벤트 콜백 함수
  * @returns 
  */
-export default function Button({text, submitType="submit", state="normal", type="primary", onClick}:ButtonProps) {
+export function Button({text, submitType="submit", state="normal", type="primary", onClick}:ButtonProps) {
   return (
     <button
         className={classNames(classes.button, classes[type], classes[state])}

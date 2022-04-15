@@ -2,7 +2,7 @@ import React, {useState, useEffect}  from 'react';
 import { useRouter } from 'next/router';
 import classes from "./common.module.scss";
 
-export default function Header() {
+export function Header() {
 
     const hidePath=[
         '/',

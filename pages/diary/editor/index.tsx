@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import { useSelector } from 'react-redux';
-import Input from '../../../components/common/Input';
-import Button from '../../../components/common/Button';
+import {Input, Button} from "@components/common";
 
 import classes from './editor.module.scss';
 import {MdInsertPhoto} from 'react-icons/md';

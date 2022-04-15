@@ -3,11 +3,8 @@ import dynamic from 'next/dynamic'
 import classes from './mapPage.module.scss';
 import {useRouter} from "next/router";
 import { useSelector, useDispatch } from 'react-redux';
-import * as mapActions from '../../store/modules/map';
-import IconButton from '../../components/common/IconButton';
-import ShortModal from '../../components/common/modal/ShortModal';
-import Input from '../../components/common/Input';
-import Button from '../../components/common/Button';
+import * as mapActions from '@store/modules/map';
+import {IconButton,ShortModal, Input , Button} from '@components/common';
 import {BsSearch} from 'react-icons/bs';
 interface MapType{
     map:{

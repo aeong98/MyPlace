@@ -22,7 +22,7 @@ interface InputProps{
  * @param onChange : onChange 콜백 함수
  * @returns 
  */
-export default function Input({value, label, type, name, id, placeholder, onChange}:InputProps) {
+export function Input({value, label, type, name, id, placeholder, onChange}:InputProps) {
     const [inputType, setInputType]=useState("default");
 
     const handleFocus=useCallback(()=>{

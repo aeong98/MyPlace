@@ -2,8 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {authService, firebaseInstance, dbService} from '../../Firebase';
 import {useRouter} from "next/router";
 import classes from './LoginForm.module.scss';
-import Text from '../common/Text';
-import Button from '../common/Button';
+import {Text, Button} from "@components/common";
 import Image from 'next/image';
 import StartImage from '../../public/images/start.png';
 
@@ -36,7 +35,7 @@ export default function LoginForm () {
     },[userInfo]);
 
     useEffect(()=>{
-        authService.onAuthStateChanged((user)=>{
+        authService.onAuthStateChanged((user:any)=>{
             if(user){
                 const {email, refreshToken, uid}= user;
                 if(email){
@@ -63,9 +62,9 @@ export default function LoginForm () {
     const singIn=()=>{
         let provider = new firebaseInstance.auth.GoogleAuthProvider();
         authService.signInWithPopup(provider)
-        .then((result)=>{
+        .then((result:any)=>{
             dbService.ref('users/'+result.user?.uid)
-                     .on('value', (snapshot)=>{
+                     .on('value', (snapshot:any)=>{
                          const data = snapshot.val();
                          // DSECRIBE: 이미 있는 계정이면 diary 로 이동
                          if(data){
@@ -77,17 +76,17 @@ export default function LoginForm () {
                          }
                      })
         })
-        .catch((error)=>{
+        .catch((error:any)=>{
             console.log(error);
         });
     }
 
     const signOut=()=>{
        authService.signOut()
-       .then((result)=>{ 
+       .then((result:any)=>{ 
            console.log(result);
        })
-       .catch((error)=>{
+       .catch((error:any)=>{
            console.log(error);
        })
     }
