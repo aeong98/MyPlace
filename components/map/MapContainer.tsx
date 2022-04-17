@@ -2,8 +2,7 @@ import React, {useEffect, useState, useRef} from 'react'
 import ListContainer from './ListContainer';
 import {Place} from './map.types';
 import { useSelector, useDispatch } from 'react-redux';
-import map from '../../store/modules/map';
-import * as mapActions from '../../store/modules/map';
+import * as mapActions from '@store/modules/map';
 const {kakao} = window;
 
 interface MapContainerProps{

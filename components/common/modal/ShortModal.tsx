@@ -8,7 +8,7 @@ interface ModalProps{
   children:React.ReactNode
 }
 
-export default function ShortModal({showModal, setShowModal, children}:ModalProps) {
+export function ShortModal({showModal, setShowModal, children}:ModalProps) {
 
   const clickCloseBtn=()=>{
       setShowModal(false);

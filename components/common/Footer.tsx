@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import * as mapActions from '../../store/modules/map';
 
-export default function Footer() {
+export function Footer() {
   const router= useRouter();
   const dispatch=useDispatch();
   // 만약에 router 가 홈(로그인) 화면이라면, footer 숨기기

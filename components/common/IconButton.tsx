@@ -7,7 +7,7 @@ interface IconButtonProps{
     onClick: (e:React.MouseEvent<HTMLDivElement>)=>void;
 }
 
-export default function IconButton({label, onClick}:IconButtonProps) {
+export function IconButton({label, onClick}:IconButtonProps) {
 
     const [isShown, setIsShown]=useState(false);
 

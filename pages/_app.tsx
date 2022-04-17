@@ -5,7 +5,7 @@ import {wrapper} from '../store';
 import Head from 'next/head';
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import Layout from '../components/common/Layout';
+import {Layout} from '@components/common/Layout';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useRouter } from 'next/router';
 function MyApp({ Component, pageProps }: AppProps) {
