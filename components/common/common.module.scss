@@ -203,3 +203,43 @@
     }
    
 }
+
+.carousel_container{
+    width: 200px;
+    height: 200px;
+    margin : 0 auto;
+    overflow:hidden;
+    position: relative;
+    border-radius: 18.31px;
+    box-shadow: 5px 5px 5px rgb(0 0 0 / 20%);
+
+
+    .carousel_list{
+        margin: 0 auto;
+        display:flex;
+    }
+    .img_wrapper{
+        width: 200px;
+        height: 200px;
+    }
+    .img{
+        object-fit: cover;
+        width: 200px;
+        height: 200px;
+    }
+    .prev_btn{
+        position:absolute;
+        left: 5px;
+        top:45%;
+        background-color: #fff;
+        border-radius: 100%;
+    }
+    .next_btn{
+        position:absolute;
+        right:5px;
+        top: 45%;
+        background-color: #fff;
+        border-radius: 100%;
+        
+    }
+}

@@ -1,10 +1,12 @@
-import React, {useCallback, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 import { useSelector } from 'react-redux';
-import {Input, Button} from "@components/common";
+import Image from "next/image";
 
 import classes from './editor.module.scss';
 import {MdInsertPhoto} from 'react-icons/md';
 import { getTodayDate } from '@hooks/utils';
+import {Input, Button, Carousel} from "@components/common";
+import {dbService} from '../../../Firebase';
 interface MapType{
     map:{
         data:any;
@@ -13,20 +15,35 @@ interface MapType{
     }
 }
 
+interface User{
+    user:{
+        data:{
+            email:string,
+            refreshToken:string,
+            uid:string,
+        }
+    }
+   
+}
+
+
 export default function index() { 
+    const selectedPlace= useSelector(({map}:MapType)=>map.data);
+    const user= useSelector(({user}:User)=>user.data);
+
     const [content, setContent]=useState({
         "date":getTodayDate(),
         "weather":'',
         "mood":'',
-        "place":{},
+        "place":selectedPlace,
         "content":'',
-        "user":{}
+        "user":user,
     })
 
     const [photos, setPhotos]=useState<string[]>([]);
     const ImgInput=useRef<HTMLInputElement>(null);
     const mood=['😄', '😂', '😘', '😒', '😣'];
-    const selectedPlace= useSelector(({map}:MapType)=>map).data;
+    console.log(selectedPlace);
 
     const onChange=useCallback((e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
         e.preventDefault();
@@ -35,16 +52,21 @@ export default function index() {
             ...content,
             [name]:value
         })
-    },[content.content]);
+    },[content]);
 
     // TODO : 나중에 id 타이핑 에러 고려야됨.
-    const onChangeMood=useCallback((e:React.MouseEvent<HTMLElement>)=>{
+    const onChangeMood=(e:React.MouseEvent<HTMLLIElement>)=>{
         e.preventDefault();
+        console.log(e.target.id);
         setContent({
             ...content,
             ["mood"]:e.target.id
         })
-    },[content.mood]);
+    };
+    
+    useEffect(()=>{
+        console.log('감지', content);
+    },[content])
 
 
     const onImgChange=useCallback((e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -67,11 +89,27 @@ export default function index() {
         }
     }
 
+    // DESCRIBE: 일기저장하기 버튼
+    const onClickSendBtn=useCallback(()=>{
+        console.log(content);
+        console.log(photos);
+        let newPostKey= dbService.ref().child('posts').push().key;
+        dbService.ref('posts/'+newPostKey).set({
+            "date":content.date,
+            "weather":content.weather,
+            "mood":content.mood,
+            "place":content.place,
+            "content":content.content,
+            "user":content.user,
+            "photos":photos,
+        })
+    },[content, photos]);
+
     return (
         <div className={classes.wrapper}>
             <div className={classes.header}>
                 <div className={classes.title}>
-                    <span className={classes.main_title}>스타벅스 </span> 에서 
+                    <span className={classes.main_title}>{selectedPlace.place_name} </span> 에서 
                 </div>
                 <div className={classes.flex_wrapper}>
                     <div className={classes.date}>{content.date}</div>
@@ -94,21 +132,21 @@ export default function index() {
                 </ul>
             </div>
             <div className={classes.photo_wrapper}>
-                <div className={classes.label}>장소에서 찍은 사진을 함께 올려 기록하세요</div>
-                <div className={classes.photo_btn} onClick={onPhotoBtnClick}>
-                    <div style={{opacity:"0.6"}}>
-                        <MdInsertPhoto></MdInsertPhoto>
-                    </div>
-                </div>
-                <input ref={ImgInput} type="file" id="photo" accept='image/*' multiple onChange={onImgChange}>
-                </input>
-                {photos.map((image,idx)=>{
-                    return (
-                        <div style={{width:"50px", height:"50px", display:"block"}}>
-                             <img src={image} alt={`${image}-${idx}`} />
+            <div className={classes.label}>장소에서 찍은 사진을 함께 올려 기록하세요</div>
+                {photos.length<1?
+                <>
+                    <div className={classes.photo_btn} onClick={onPhotoBtnClick}>
+                        <div style={{opacity:"0.6"}}>
+                            <MdInsertPhoto></MdInsertPhoto>
                         </div>
-                    )
-                })}
+                    </div>
+                </>
+                :
+                <Carousel images={photos}></Carousel>
+                }
+                <input ref={ImgInput} type="file" id="photo" accept='image/*' multiple onChange={onImgChange} style={{display:"none"}}>
+                </input>
+              
             </div>
             <div className={classes.body}>
                 <div className={classes.label}>장소에서 있었던 일을 기록해주세요</div>
@@ -124,6 +162,7 @@ export default function index() {
             <div className={classes.footer}>
                 <Button
                     text="일기 저장하기"
+                    onClick={onClickSendBtn}
                 ></Button>
             </div>
         </div>

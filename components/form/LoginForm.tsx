@@ -47,12 +47,12 @@ export default function LoginForm () {
                     })
                 }
             }else{
-                setIsLoggedIn(false);
-                setUserInfo({
-                    email:'',
-                    refreshToken: '',
-                    uid: '',
-                })
+                // setIsLoggedIn(false);
+                // setUserInfo({
+                //     email:'',
+                //     refreshToken: '',
+                //     uid: '',
+                // })
             }
         })
     },[])
