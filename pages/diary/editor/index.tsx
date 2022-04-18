@@ -7,6 +7,7 @@ import {MdInsertPhoto} from 'react-icons/md';
 import { getTodayDate } from '@hooks/utils';
 import {Input, Button, Carousel} from "@components/common";
 import {dbService} from '../../../Firebase';
+import {Repository} from '@hooks/repository';
 interface MapType{
     map:{
         data:any;
@@ -94,7 +95,7 @@ export default function index() {
         console.log(content);
         console.log(photos);
         let newPostKey= dbService.ref().child('posts').push().key;
-        dbService.ref('posts/'+newPostKey).set({
+        const newContent={
             "date":content.date,
             "weather":content.weather,
             "mood":content.mood,
@@ -102,7 +103,8 @@ export default function index() {
             "content":content.content,
             "user":content.user,
             "photos":photos,
-        })
+        }
+        Repository.storePosts(newPostKey, newContent)
     },[content, photos]);
 
     return (
