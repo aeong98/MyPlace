@@ -8,6 +8,8 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import {Layout} from '@components/common/Layout';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { useRouter } from 'next/router';
+
+
 function MyApp({ Component, pageProps }: AppProps) {
 
   const queryClientRef = React.useRef<QueryClient>();
