@@ -45,7 +45,7 @@ export function Carousel({images}: CarouselProps) {
             <div className={classes.carousel_list} ref={slideRef}>
                 {images.map((image,idx)=>{
                     return (
-                        <div className={classes.img_wrapper}>
+                        <div className={classes.img_wrapper} key={`image-${image}-${idx}`}>
                         <img src={image} alt={`${image}-${idx}`} className={classes.img}/>
                         </div>
                     )

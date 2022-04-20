@@ -6,8 +6,9 @@ import classes from './editor.module.scss';
 import {MdInsertPhoto} from 'react-icons/md';
 import { getTodayDate } from '@hooks/utils';
 import {Input, Button, Carousel} from "@components/common";
-import {dbService} from '../../../Firebase';
+import {dbService, storageService} from '../../../Firebase';
 import {Repository} from '@hooks/repository';
+import { ReadStream } from 'tty';
 interface MapType{
     map:{
         data:any;
@@ -42,6 +43,8 @@ export default function index() {
     })
 
     const [photos, setPhotos]=useState<string[]>([]);
+    const [attachments, setAttachments]=useState([]);
+    const [fileNames, setFileNames]=useState<string[]>([]);
     const ImgInput=useRef<HTMLInputElement>(null);
     const mood=['😄', '😂', '😘', '😒', '😣'];
     console.log(selectedPlace);
@@ -70,20 +73,34 @@ export default function index() {
     },[content])
 
 
-    const onImgChange=useCallback((e:React.ChangeEvent<HTMLInputElement>)=>{
+    const onImgChange=useCallback(async(e:React.ChangeEvent<HTMLInputElement>)=>{
         const imageLists=e.target.files;
-        let imageUrlLists=[...photos];
+        let attach:any=[...attachments];
+        let imageUrlLists:any=[...photos];
+        let names=[];
         if(imageLists){
-            for (let i=0; i<imageLists.length; i++){
+            for (let i=0; i<imageLists.length; i++){    
+                // 파일이름 저장
+                names.push(imageLists[i].name);   
+                // 서버에 저장할 인코딩 파일 저장
+                const reader = new FileReader();
+                reader.readAsDataURL(imageLists[i]);
+                reader.onloadend=()=>{
+                    let base64data =reader.result;
+                    attach.push(base64data);
+
+                }     
+                // 현재 이미지 URL 저장 (프리뷰용)
                 const currentImageUrl= URL.createObjectURL(imageLists[i]);
-                imageUrlLists.push(currentImageUrl);
+                imageUrlLists.push(currentImageUrl)
             }
         }
-
+        setFileNames(names);
+        setAttachments(attach);
         setPhotos(imageUrlLists);
     },[photos]);
 
-    const onPhotoBtnClick=(e:React.MouseEvent<HTMLElement>)=>{
+    const onPhotoBtnClick=(e:React.MouseEvent<HTMLDivElement>)=>{
         e.preventDefault();
         if(ImgInput){
             ImgInput.current!.click();
@@ -91,9 +108,16 @@ export default function index() {
     }
 
     // DESCRIBE: 일기저장하기 버튼
-    const onClickSendBtn=useCallback(()=>{
-        console.log(content);
-        console.log(photos);
+    const onClickSendBtn=useCallback(async()=>{
+        let attachmentURL=[];
+        if(attachments.length !==0){
+            for (let i=0; i< attachments.length; i++){
+                const fileRef = storageService.ref().child(`${user.uid}/${fileNames![i]}`)
+                const response= await fileRef.putString(attachments[i],"data_url")
+                attachmentURL.push(await response.ref.getDownloadURL());
+            }
+        }
+
         let newPostKey= dbService.ref().child('posts').push().key;
         const newContent={
             "date":content.date,
@@ -102,10 +126,18 @@ export default function index() {
             "place":content.place,
             "content":content.content,
             "user":content.user,
-            "photos":photos,
+            "photos":attachmentURL,
         }
-        Repository.storePosts(newPostKey, newContent)
-    },[content, photos]);
+        await Repository.storePosts(newPostKey, newContent)
+                  .then((res:any)=>{
+                    console.log(res)
+                  })
+                  .catch((err:any)=>{
+                      console.log(err);
+                  })
+
+        
+    },[content, photos, fileNames]);
 
     return (
         <div className={classes.wrapper}>
@@ -129,7 +161,7 @@ export default function index() {
                 <div className={classes.label}>기분을 기록해보세요</div>
                 <ul className={classes.emotion_list}>
                     {mood.map((item, idx)=>{
-                        return <li className={classes.emotion} id={`${idx}`} onClick={onChangeMood}>{item}</li>
+                        return <li key={`emotion-${item}-${idx}`}className={classes.emotion} id={`${idx}`} onClick={onChangeMood}>{item}</li>
                     })}
                 </ul>
             </div>

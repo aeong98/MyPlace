@@ -1,7 +1,8 @@
-import { dbService } from "Firebase";
+import { dbService } from "../Firebase";
+
 
 export const Repository={
-    storePosts:(postsId:string, content:any)=>{
+    storePosts:(postsId:string, content:any)=>
         dbService.ref('posts/'+postsId).set({
             "date":content.date,
             "weather":content.weather,
@@ -9,7 +10,7 @@ export const Repository={
             "place":content.place,
             "content":content.content,
             "user":content.user,
-            "photos":content.photo,
+            "photos":content.photos,
         })
-    }
+    ,
 }
