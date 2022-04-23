@@ -8,7 +8,6 @@ import { getTodayDate } from '@hooks/utils';
 import {Input, Button, Carousel} from "@components/common";
 import {dbService, storageService} from '../../../Firebase';
 import {Repository} from '@hooks/repository';
-import { ReadStream } from 'tty';
 interface MapType{
     map:{
         data:any;
