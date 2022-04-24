@@ -7,8 +7,8 @@ const config ={
   trailingSlash: true,
   images : {
     loader:'akamai',
-    path:'http://localhost:3000/',
-    domains: ['localhost']
+    path:'',
+    domains: []
   },
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],

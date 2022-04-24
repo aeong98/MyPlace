@@ -20,14 +20,10 @@ export const Repository={
             return data
         })
     },
-    getUserPosts:()=>{
+    getUserPosts:()=>
         dbService.ref()
                 .child("posts")
                 .orderByChild("user_email")
                 .equalTo("sy9815@gmail.com")
-                .once("value", (snapshot:any)=>{
-            console.log(snapshot.val());
-        })
-    }
-
+                .once("value")
 }
