@@ -3,6 +3,8 @@ import Image from 'next/image';
 
 import {Layout} from '@components/common';
 import {Repository} from "@hooks/repository";
+import {Mood} from "@shared/constants";
+import DiaryCardList from '@components/diary/DiaryCardList';
 
 import classes from './diary.module.scss';
 
@@ -21,7 +23,7 @@ export default function Diary() {
       dataList.push(data[key])
     });
 
-    console.log(dataList[0].photos[0])
+    console.log(dataList[0])
     setPostsList(dataList);
   }
 
@@ -71,54 +73,9 @@ export default function Diary() {
               <div className={classes.main}>내 위시템 전체 보기</div>
               <div className={classes.sub}>총 1개의 위시템</div>
           </div>
-          <div className={classes.edit_btn}>편집</div>
+          <div className={classes.edit_btn}>편집</div>  
         </div>
-        <div className={classes.diary_lists}>
-            <div className={classes.diary_month}>
-                <div className={classes.diary_date}>2022년 3월</div>
-                <div className={classes.diary_grid}>
-                    <div className={classes.diary_card}>
-                      <div className={classes.diary_card_thumbnail}>
-                       {postsList.length>0 && <Image src={postsList[0].photos[0]} width={100} height={100} layout={"intrinsic"}></Image>}
-                      </div>
-                      <div className={classes.diary_card_title}>사이트에서 가격보기 네이버 지식 IN</div>
-                    </div>
-                    <div className={classes.diary_card}>
-                      <div className={classes.diary_card_thumbnail}></div>
-                      <div className={classes.diary_card_title}>사이트에서 가격보기 네이버 지식 IN</div>
-                    </div>
-                    <div className={classes.diary_card}>
-                      <div className={classes.diary_card_thumbnail}></div>
-                      <div className={classes.diary_card_title}>사이트에서 가격보기 네이버 지식 IN</div>
-                    </div>
-                    <div className={classes.diary_card}>
-                      <div className={classes.diary_card_thumbnail}></div>
-                      <div className={classes.diary_card_title}>사이트에서 가격보기 네이버 지식 IN</div>
-                    </div>
-                </div>
-            </div>
-            <div className={classes.diary_month}>
-                <div className={classes.diary_date}>2022년 3월</div>
-                <div className={classes.diary_grid}>
-                    <div className={classes.diary_card}>
-                      <div className={classes.diary_card_thumbnail}></div>
-                      <div className={classes.diary_card_title}>사이트에서 가격보기 네이버 지식 IN</div>
-                    </div>
-                    <div className={classes.diary_card}>
-                      <div className={classes.diary_card_thumbnail}></div>
-                      <div className={classes.diary_card_title}>사이트에서 가격보기 네이버 지식 IN</div>
-                    </div>
-                    <div className={classes.diary_card}>
-                      <div className={classes.diary_card_thumbnail}></div>
-                      <div className={classes.diary_card_title}>사이트에서 가격보기 네이버 지식 IN</div>
-                    </div>
-                    <div className={classes.diary_card}>
-                      <div className={classes.diary_card_thumbnail}></div>
-                      <div className={classes.diary_card_title}>사이트에서 가격보기 네이버 지식 IN</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <DiaryCardList diaryLists={postsList}/>
       </div>
       </div>
     </>

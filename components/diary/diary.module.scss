@@ -1,0 +1,70 @@
+.diary_lists{
+    margin-top: 20px;
+    height: 50%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    .diary_month{
+        height: fit-content;
+        margin-bottom: 50px;
+        color: rgb(102, 112, 128); 
+        .diary_date{
+            width:100%;
+            font-size:15px;
+            height: fit-content;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .diary_grid{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 30px;
+        }
+        .diary_card{
+            min-width:150px;
+            min-height:150px;
+            .diary_card_thumbnail{
+                width: 150px;
+                height: 100px;
+                position: relative;
+                text-align: center;
+                margin: 0 auto;
+                box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
+                border-radius: 10px;
+                overflow: hidden;   
+                &:hover{
+                    cursor: pointer;
+                    box-shadow: 0px 0px 15px rgb(0 0 0 /35%);
+                }            
+                .image_wapper{
+                    transition: all 0.1s linear;
+                    padding:10px;
+                    background-color: #6A3EA1;
+                    color: #fff;
+                    height: 100%;
+                    font-weight: bold;
+                    &:hover{
+                        transform: scale(1.2);
+                        cursor: pointer;
+
+                    }    
+                }
+                .mood{
+                    font-size: 30px;
+                }
+                .place_name{
+                    color: #fff;
+                    font-size:15px;
+                }
+
+                
+            }
+            .diary_card_title{
+                margin-top: 7px;
+                font-size:13px;
+                padding: 2px;
+                text-align: center;
+            }
+        }
+    }
+}
